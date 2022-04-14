@@ -20,5 +20,5 @@ romania = Graph(['Or', 'Ne', 'Ze', 'Ia', 'Ar', 'Si', 'Fa',
                     ('Hi', 'Ef', 86)
                 ])
 
-bfs(romania, romania.get_node_from_name('Bu'), romania.get_node_from_name('Ti'))
+ucs(romania, romania.get_node_from_name('Bu'), romania.get_node_from_name('Ti'))
 
