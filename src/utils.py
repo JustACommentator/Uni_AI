@@ -8,7 +8,7 @@ def link_list_from_node_list(graph, nodes):
     for i in range(nodes.len()):
         return
 
-
+#test
 
 def new_bfs(graph: Graph, start_node: Node, end_node: Node):
     print("BFS: " + start_node.node_name + " -> " + end_node.node_name + ":")
