@@ -11,6 +11,7 @@ class AStar:
         self.q_closed = PRIOQueue()
         self.a_star_next(s_start, s_goal)
 
+    #test
     #open and close as priority queues
     def a_star_next(self, s_start, s_goal):
         self.a_star_initialize(s_start)

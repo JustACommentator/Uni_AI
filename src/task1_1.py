@@ -1,5 +1,5 @@
-from src.graph import Graph
-from src.utils import *
+from src.graph_extension import Graph
+from src.utils_extension import *
 
 
 romania = Graph(['Or', 'Ne', 'Ze', 'Ia', 'Ar', 'Si', 'Fa',
