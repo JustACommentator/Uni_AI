@@ -36,3 +36,11 @@ class Graph:
         for node in self.nodes:
             if node.node_name is node_name:
                 return node
+
+    def get_link_from_nodes(self, node1, node2):
+        for link in node1.links:
+            if link.link_target is node2:
+                return link
+
+        return None
+
