@@ -1,45 +1,50 @@
-from node import Node
+from prettytable import PrettyTable
+from utils import *
+
+
+class Node:
+
+    def __init__(self, name):
+        self.parent = 0
+        self.name = name
+        self.edges = []
+        self.value = 0
+
+
+class Edge:
+
+    def __init__(self, edge):
+        self.start = edge[0]
+        self.end = edge[1]
+        self.value = edge[2]
 
 
 class Graph:
-    node_names: []
-    nodes: []
-    paths: []
 
-    def __init__(self, node_names, paths, is_undirected: bool = True):
-        self.node_names = node_names
+    def __init__(self, node_list, edges):
         self.nodes = []
-        self.paths = []
+        for name in node_list:
+            self.nodes.append(Node(name))
 
-        for node_name in node_names:
-            used_paths = []
-            for (start, end, cost) in paths:
-                if start is node_name:
-                    used_paths.append((end, cost))
-                    self.paths.append((start, end, cost))
-                elif end is node_name and is_undirected:
-                    used_paths.append((start, cost))
-            node = Node(node_name, used_paths)
-            self.nodes.append(node)
+        for e in edges:
+            e = (getNode(e[0], self.nodes), getNode(e[1], self.nodes), e[2])
 
-    def __str__(self):
-        result = 'Graph Data:\n\nAll Nodes:'
-        for node_name in self.node_names:
-            result += '\n' + node_name
-        result += '\n\nAll Edges:'
-        for (start, end, cost) in self.paths:
-            result += '\nFrom ' + start + ' to ' + end + ': ' + str(cost)
+            self.nodes[next((i for i, v in enumerate(self.nodes) if v.name == e[0].name), -1)].edges.append(Edge(e))
+            self.nodes[next((i for i, v in enumerate(self.nodes) if v.name == e[1].name), -1)].edges.append(
+                Edge((e[1], e[0], e[2])))
 
-        return result
+    def print(self):
+        node_list = self.nodes
 
-    def get_node_from_name(self, node_name: str):
-        for node in self.nodes:
-            if node.node_name is node_name:
-                return node
+        t = PrettyTable(['  '] + [i.name for i in node_list])
+        for node in node_list:
+            edge_values = ['X'] * len(node_list)
+            for edge in node.edges:
+                edge_values[next((i for i, e in enumerate(node_list) if e.name == edge.end.name), -1)] = edge.value
+            t.add_row([node.name] + edge_values)
+        print(t)
 
-    def get_link_from_nodes(self, node1, node2):
-        for link in node1.links:
-            if link.link_target is node2:
-                return link
 
-        return None;
+
+
+
