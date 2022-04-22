@@ -44,7 +44,11 @@ class Graph:
             t.add_row([node.name] + edge_values)
         print(t)
 
+    def get_node_from_name(self, node_name: str):
+        for node in self.nodes:
+            if node.name is node_name:
+                return node
 
-
-
-
+    def getEdge(self, node1, node2):
+        return
+        # todo: add functionality if needed. If not, delete

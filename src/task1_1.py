@@ -1,5 +1,6 @@
 from src.graph_extension import Graph
-from src.utils_extension import *
+from src.utils import *
+from  algorithms import *
 
 
 romania = Graph(['Or', 'Ne', 'Ze', 'Ia', 'Ar', 'Si', 'Fa',
@@ -20,5 +21,7 @@ romania = Graph(['Or', 'Ne', 'Ze', 'Ia', 'Ar', 'Si', 'Fa',
                     ('Hi', 'Ef', 86)
                 ])
 
-ucs(romania, romania.get_node_from_name('Bu'), romania.get_node_from_name('Ti'))
+print(getNode("Fa", romania.nodes).edges[0].end.name)
+
+#bfs(romania, romania.get_node_from_name('Bu'), romania.get_node_from_name('Ti'))
 
