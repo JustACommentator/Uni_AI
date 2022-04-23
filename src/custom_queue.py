@@ -93,3 +93,26 @@ class PRIOQueue:
 
     def is_empty(self):
         return len(self.queue) == 0
+
+    def clear(self):
+        self.current = None
+        self.queue = []
+
+    def remove(self, target: Node):
+        new_queue = []
+        i = 1
+        while i < len(self.queue):
+            if self.queue[i] is not target:
+                new_queue.append(self.queue[i])
+            i += 1
+
+        if target is self.current:
+            self.current = self.queue[0]
+
+        self.queue = new_queue
+
+    def contains(self, target: Node):
+        for x in self.queue:
+            if x[1] is target:
+                return True
+        return False

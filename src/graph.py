@@ -9,6 +9,9 @@ class Node:
         self.name = name
         self.edges = []
         self.value = 0
+        self.f = 0
+        self.g = 0
+        self.parent = None
 
 
 class Edge:
@@ -46,9 +49,13 @@ class Graph:
 
     def get_node_from_name(self, node_name: str):
         for node in self.nodes:
-            if node.name is node_name:
+            if node.name == node_name:
                 return node
 
-    def getEdge(self, node1, node2):
-        return
-        # todo: add functionality if needed. If not, delete
+    def get_neighbours(self, node):
+        node_list = []
+        for e in self.nodes:
+            for edge in e.edges:
+                if edge.start is node and edge.start not in node_list:
+                    node_list.append((edge.end, edge.value))
+        return node_list
