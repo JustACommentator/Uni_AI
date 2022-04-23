@@ -17,8 +17,11 @@ def new_bfs(graph: Graph, start_node: Node, end_node: Node):
         if current_node[0] is end_node:
             break
 
-        for link in current_node[0].links:
-            target: Node = graph.get_node_from_name(link.link_target)
+        if current_node[0] is None:
+            continue
+
+        for link in current_node[0].edges:
+            target: Node = graph.get_node_from_name(link.end)
             if target not in visited:
                 queue.enqueue((target, current_node[0]))
                 visited.append((target, current_node[0]))
@@ -38,7 +41,7 @@ def new_bfs(graph: Graph, start_node: Node, end_node: Node):
     print("Path:")
     for node in path:
         print(node.node_name)
-    print("Cost: " + totalCost)
+    print("Cost: " + str(totalCost))
 
 
 def bfs(graph, start, goal):

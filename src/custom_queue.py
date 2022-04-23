@@ -1,7 +1,4 @@
-from typing import Generic, TypeVar
 from graph import Node
-
-T = TypeVar('T')
 
 
 class FIFOQueue:
@@ -96,17 +93,3 @@ class PRIOQueue:
 
     def is_empty(self):
         return len(self.queue) == 0
-
-    def clear(self):
-        self.queue = []
-        self.current = None
-
-    def remove(self, target: Node):
-        new = []
-        for node in self.queue:
-            if node is not target:
-                new.append(node)
-
-        self.queue = new
-        self.current = self.queue[0] #TODO @Tarik: richtiges Element zuweisen
-

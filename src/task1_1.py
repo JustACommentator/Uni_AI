@@ -1,6 +1,4 @@
-from src.graph_extension import Graph
-from src.utils import *
-from  algorithms import *
+from searchalgorithms import *
 
 
 romania = Graph(['Or', 'Ne', 'Ze', 'Ia', 'Ar', 'Si', 'Fa',
@@ -21,7 +19,10 @@ romania = Graph(['Or', 'Ne', 'Ze', 'Ia', 'Ar', 'Si', 'Fa',
                     ('Hi', 'Ef', 86)
                 ])
 
-print(getNode("Fa", romania.nodes).edges[0].end.name)
-
-#bfs(romania, romania.get_node_from_name('Bu'), romania.get_node_from_name('Ti'))
+print('---')
+bfs(romania, 'Bu', 'Ti')
+print('---')
+dfs(romania, 'Bu', 'Ti')
+print('---')
+ucs(romania, 'Bu', 'Ti')
 
