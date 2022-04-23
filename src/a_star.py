@@ -6,7 +6,6 @@ import utils
 from custom_queue import *
 from grid import *
 
-
 class AStar:
 
     def __init__(self, grid, start_node, goal_node):
@@ -22,7 +21,7 @@ class AStar:
         self.q_open.enqueue(self.start_node, sys.maxsize - self.get_f(self.start_node))
 
     def next_step(self):
-        if not self.q_open.is_empty():
+        if not self.q_open.is_empty() and self.goal_node not in self.path:
             current_tuple = self.q_open.dequeue()
             cur_prio = current_tuple[0]
             cur = current_tuple[1]
@@ -51,15 +50,17 @@ class AStar:
                         neighbour.g = sys.maxsize
                         neighbour.parent = None
                 self.update_vertex(cur, neighbour, cost)
-            #return "no path found"
+
+
+            # return "no path found"
 
     def update_vertex(self, node, neighbour, cost):
         if not self.q_open.contains(neighbour) and node.g + cost < neighbour.g:
             neighbour.g = node.g + self.get_edge_cost(node, neighbour)
             neighbour.parent = node
 
-            #if self.q_open.contains(neighbour):
-                #self.q_open.remove(neighbour)
+            # if self.q_open.contains(neighbour):
+            # self.q_open.remove(neighbour)
 
             if not self.q_open.contains(neighbour):
                 self.q_open.enqueue(neighbour, sys.maxsize - self.get_f(neighbour))
@@ -72,7 +73,7 @@ class AStar:
             c = c.parent
         goal_field = self.grid.get_field_from_node(self.goal_node)
         node_field = self.grid.get_field_from_node(node)
-        h_cost = math.sqrt(math.pow(goal_field.coord_x-node_field.coord_x, 2) + math.pow(goal_field.coord_y-node_field.coord_y, 2))
+        h_cost = abs(goal_field.coord_x - node_field.coord_x) + abs(goal_field.coord_y - node_field.coord_y)
         return g_cost + h_cost
 
     def get_edge_cost(self, start, end):
