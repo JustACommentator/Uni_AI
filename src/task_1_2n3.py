@@ -85,7 +85,7 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
 
-    current_path = a_star.next_step()
+    a_star.next_step()  # here <---------------------------------------------------------
     clock.tick(120)
 
     #if q_open.is_empty():
