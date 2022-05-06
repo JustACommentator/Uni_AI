@@ -4,25 +4,23 @@ import random
 class QueensProblem:
 
     def __init__(self):
-        self.board = [["+" for i in range(8)] for k in range(8)]
         self.queenString = ""
 
     def setBoard(self, queenString):
-        for i in range(8):
-            self.board[i][int(queenString[i]) - 1] = "Q"
-        for i in range(8):
-            self.queenString += str(self.board[i].index("Q") + 1)
+        self.queenString = queenString
 
     def randomizeBoard(self):
-        queenString = ""
+        self.queenString = ""
         for i in range(8):
-            queenString += str(random.randint(1, 8))
-        self.setBoard(queenString)
+            self.queenString += str(random.randint(1, 8))
 
     def printBoard(self):
-        for i in range(len(self.board)):
-            for k in range(len(self.board[0])):
-                print(self.board[k][i] + "  ", end="")
+        for i in range(8):
+            for k in range(8):
+                if int(self.queenString[k]) == i + 1:
+                    print("Q  ", end="")
+                else:
+                    print(".  ", end="")
             print("")
 
     def fitnessScore(self):  # using number of non-attacking pairs of queens as fitness score. Optimal: 28
@@ -43,7 +41,7 @@ class QueensProblem:
                     continue
                 score += 1
 
-        return score / 2  # each queen is counted twice per pair
+        return int(score / 2)  # each queen is counted twice per pair
 
 
 Q = QueensProblem()
@@ -51,5 +49,3 @@ Q = QueensProblem()
 Q.randomizeBoard()
 
 Q.printBoard()
-
-print(Q.fitnessScore())
