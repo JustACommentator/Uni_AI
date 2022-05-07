@@ -3,7 +3,7 @@ import numpy
 import board
 
 # one in X cases will mutate
-MUTATION_CHANCE = 1000
+MUTATION_CHANCE = 100
 
 # iterations til end
 ITERATION_COUNT = 100
@@ -60,23 +60,21 @@ def fitnessScore(chromosome):  # using number of non-attacking pairs of queens a
 
 
 def geneticAlgorithm(population):
-    fitnesses = []
+    totalFitness = 0
     for chromosome in population:
-        fitnesses.append(fitnessScore(chromosome))
+        totalFitness += fitnessScore(chromosome)
+    probabilities = [fitnessScore(chromosome) / totalFitness for chromosome in population]
 
     newPopulation = []
-    for i in range(len(population)):
-        parent1 = selectParents(population, fitnesses)
-        parent2 = selectParents(population, fitnesses)
-        child = reproduce(parent1, parent2)
+    for i in range(POPULATION_SIZE):
+        parents = selectParents(population, probabilities)
+        child = reproduce(*parents)
         newPopulation.append(child)
     return newPopulation
 
 
-def selectParents(population, fitnesses):
-    totalFitness = sum(fitnesses)
-    chromosomeProbabilities = [fitnessScore(chromosome) / totalFitness for chromosome in population]
-    return numpy.random.choice(population, p=chromosomeProbabilities)
+def selectParents(population, probabilities):
+    return numpy.random.choice(population, 2, p=probabilities)
 
 
 def reproduce(x, y):  # crossover not guaranteed. For guaranteed crossover: Change c range
