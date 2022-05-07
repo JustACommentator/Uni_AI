@@ -1,14 +1,18 @@
 import random
 import numpy
+import board
 
 # one in X cases will mutate
-MUTATION_CHANCE = 25
+MUTATION_CHANCE = 1000
 
 # iterations til end
 ITERATION_COUNT = 100
 
 # size of Population
 POPULATION_SIZE = 100
+
+# size of guaranteed crossover per parent (0-4)
+GUARANTEED_CROSSOVER = 0
 
 
 class QueensProblem:
@@ -77,7 +81,7 @@ def selectParents(population, fitnesses):
 
 def reproduce(x, y):  # crossover not guaranteed. For guaranteed crossover: Change c range
     n = len(x)
-    c = random.randint(0, n)
+    c = random.randint(GUARANTEED_CROSSOVER, n-GUARANTEED_CROSSOVER)
     child = ""
     child += x[0:c]
     child += y[c:n + 1]
@@ -115,17 +119,17 @@ for i in range(ITERATION_COUNT):
     for chromosome in population:
         fitnesses.append(fitnessScore(chromosome))
     print(f"Best specimen: {population[fitnesses.index(max(fitnesses))]}. Fitness score: {max(fitnesses)}. Average: {sum(fitnesses)/len(fitnesses)}")
+    board.update(population[fitnesses.index(max(fitnesses))])
 
 print("-----------------------------------------------------------------------------------------")
 
 print(f"Best specimen in final generation after {ITERATION_COUNT} iterations with {POPULATION_SIZE} specimen per generation:")
-best = population[fitnesses.index(max(fitnesses))]
+print(population[fitnesses.index(max(fitnesses))])
 print(f"Fitness score: {max(fitnesses)}")
-
-Q = QueensProblem()
-Q.set(best)
-Q.print()
 
 avg2 = sum(fitnesses)/len(fitnesses)
 increase = avg2 / avg1
 print(f"Initial average score: {avg1}. Final average score: {avg2}. Change: {round(abs((avg2/avg1)-1)*100, 2)}%")
+
+while True:
+    continue
