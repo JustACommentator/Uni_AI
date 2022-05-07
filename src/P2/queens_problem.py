@@ -111,6 +111,7 @@ fitnesses = []
 for chromosome in population:
     fitnesses.append(fitnessScore(chromosome))
 avg1 = sum(fitnesses)/len(fitnesses)
+maxFitness = 0
 
 for i in range(ITERATION_COUNT):
     print(f"Generation {i + 1}:")
@@ -118,16 +119,17 @@ for i in range(ITERATION_COUNT):
     fitnesses = []
     for chromosome in population:
         fitnesses.append(fitnessScore(chromosome))
-    print(f"Best specimen: {population[fitnesses.index(max(fitnesses))]}. Fitness score: {max(fitnesses)}. Average: {sum(fitnesses)/len(fitnesses)}")
-    board.update(population[fitnesses.index(max(fitnesses))])
+    maxFitness = max(fitnesses)
+    print(f"Best specimen: {population[fitnesses.index(maxFitness)]}. Fitness score: {maxFitness}. Average: {sum(fitnesses)/POPULATION_SIZE}")
+    board.update(population[fitnesses.index(maxFitness)])
 
 print("-----------------------------------------------------------------------------------------")
 
 print(f"Best specimen in final generation after {ITERATION_COUNT} iterations with {POPULATION_SIZE} specimen per generation:")
 print(population[fitnesses.index(max(fitnesses))])
-print(f"Fitness score: {max(fitnesses)}")
+print(f"Fitness score: {maxFitness}")
 
-avg2 = sum(fitnesses)/len(fitnesses)
+avg2 = sum(fitnesses)/POPULATION_SIZE
 increase = avg2 / avg1
 print(f"Initial average score: {avg1}. Final average score: {avg2}. Change: {round(abs((avg2/avg1)-1)*100, 2)}%")
 
