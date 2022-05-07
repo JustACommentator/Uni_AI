@@ -3,7 +3,7 @@ import numpy
 import board
 
 # one in X cases will mutate
-MUTATION_CHANCE = 1000
+MUTATION_CHANCE = 100
 
 # iterations til end
 ITERATION_COUNT = 100
@@ -60,21 +60,23 @@ def fitnessScore(chromosome):  # using number of non-attacking pairs of queens a
 
 
 def geneticAlgorithm(population):
-    totalFitness = 0
+    fitnesses = []
     for chromosome in population:
-        totalFitness += fitnessScore(chromosome)
-    probabilities = [fitnessScore(chromosome) / totalFitness for chromosome in population]
+        fitnesses.append(fitnessScore(chromosome))
 
     newPopulation = []
     for i in range(POPULATION_SIZE):
-        parents = selectParents(population, probabilities)
-        child = reproduce(*parents)
+        parent1 = selectParents(population, fitnesses)
+        parent2 = selectParents(population, fitnesses)
+        child = reproduce(parent1, parent2)
         newPopulation.append(child)
     return newPopulation
 
 
-def selectParents(population, probabilities):
-    return numpy.random.choice(population, 2, p=probabilities)
+def selectParents(population, fitnesses):
+    totalFitness = sum(fitnesses)
+    chromosomeProbabilities = [fitnessScore(chromosome) / totalFitness for chromosome in population]  # slow as fuck, runs literally 100 times faster with random selection
+    return numpy.random.choice(population, p=chromosomeProbabilities)
 
 
 def reproduce(x, y):  # crossover not guaranteed. For guaranteed crossover: Change c range
@@ -132,4 +134,4 @@ increase = avg2 / avg1
 print(f"Initial average score: {avg1}. Final average score: {avg2}. Change: {round(abs((avg2/avg1)-1)*100, 2)}%")
 
 while True:
-    True
+    continue
