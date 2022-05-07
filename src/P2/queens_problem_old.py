@@ -79,7 +79,7 @@ def selectParents(population, fitnesses):
     return numpy.random.choice(population, p=chromosomeProbabilities)
 
 
-def reproduce(x, y):  # crossover not guaranteed. For guaranteed crossover: Change c range
+def reproduce(x, y):
     n = len(x)
     c = random.randint(GUARANTEED_CROSSOVER, n-GUARANTEED_CROSSOVER)
     child = ""
@@ -122,11 +122,13 @@ for i in range(ITERATION_COUNT):
     maxFitness = max(fitnesses)
     print(f"Best specimen: {population[fitnesses.index(maxFitness)]}. Fitness score: {maxFitness}. Average: {sum(fitnesses)/POPULATION_SIZE}")
     board.update(population[fitnesses.index(maxFitness)])
+    if maxFitness == 28:
+        break
 
 print("-----------------------------------------------------------------------------------------")
 
-print(f"Best specimen in final generation after {ITERATION_COUNT} iterations with {POPULATION_SIZE} specimen per generation:")
-print(population[fitnesses.index(max(fitnesses))])
+print(f"Best specimen in final generation with {POPULATION_SIZE} specimen per generation:")
+print(population[fitnesses.index(maxFitness)])
 print(f"Fitness score: {maxFitness}")
 
 avg2 = sum(fitnesses)/POPULATION_SIZE
@@ -134,4 +136,4 @@ increase = avg2 / avg1
 print(f"Initial average score: {avg1}. Final average score: {avg2}. Change: {round(abs((avg2/avg1)-1)*100, 2)}%")
 
 while True:
-    continue
+    True

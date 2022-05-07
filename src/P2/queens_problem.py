@@ -3,7 +3,7 @@ import numpy
 import board
 
 # one in X cases will mutate
-MUTATION_CHANCE = 1000
+MUTATION_CHANCE = 100
 
 # iterations til end
 ITERATION_COUNT = 100
@@ -77,7 +77,7 @@ def selectParents(population, probabilities):
     return numpy.random.choice(population, 2, p=probabilities)
 
 
-def reproduce(x, y):  # crossover not guaranteed. For guaranteed crossover: Change c range
+def reproduce(x, y):
     n = len(x)
     c = random.randint(GUARANTEED_CROSSOVER, n-GUARANTEED_CROSSOVER)
     child = ""
@@ -120,11 +120,13 @@ for i in range(ITERATION_COUNT):
     maxFitness = max(fitnesses)
     print(f"Best specimen: {population[fitnesses.index(maxFitness)]}. Fitness score: {maxFitness}. Average: {sum(fitnesses)/POPULATION_SIZE}")
     board.update(population[fitnesses.index(maxFitness)])
+    if maxFitness == 28:
+        break
 
 print("-----------------------------------------------------------------------------------------")
 
-print(f"Best specimen in final generation after {ITERATION_COUNT} iterations with {POPULATION_SIZE} specimen per generation:")
-print(population[fitnesses.index(max(fitnesses))])
+print(f"Best specimen in final generation with {POPULATION_SIZE} specimen per generation:")
+print(population[fitnesses.index(maxFitness)])
 print(f"Fitness score: {maxFitness}")
 
 avg2 = sum(fitnesses)/POPULATION_SIZE
