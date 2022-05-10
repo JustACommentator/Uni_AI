@@ -66,8 +66,9 @@ def reproduce(x, y):
 
 
 def mutate(child):
-    n = random.randint(0, 7)
-    child = child[:n] + str(random.randint(1, 8)) + child[n + 1:]
+    for i in range(settings.MUTATION_COUNT):
+        n = random.randint(0, 7)
+        child = child[:n] + str(random.randint(1, 8)) + child[n + 1:]
     return child
 
 
