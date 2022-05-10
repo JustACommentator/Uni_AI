@@ -1,0 +1,15 @@
+# one in X cases will mutate
+MUTATION_CHANCE = 100
+
+# iterations til end
+ITERATION_COUNT = 10000
+
+# size of Population
+POPULATION_SIZE = 500
+
+# size of guaranteed crossover per parent (0-4)
+GUARANTEED_CROSSOVER = 1
+
+# if true, after reproduction, child and parents will be compared. The best individual will be added to new population
+# WARNING: This will increase the chance to end in a local maximum
+DOUBLE_CHECK = False
