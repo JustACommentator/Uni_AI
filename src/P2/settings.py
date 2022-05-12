@@ -1,3 +1,10 @@
+# BACKTRACKING:
+
+# maximum number of queens on the board. Will also affect board size
+QUEEN_COUNT = 8
+
+# GENETICS:
+
 # one in X cases will mutate
 MUTATION_CHANCE = 100
 

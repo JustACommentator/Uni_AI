@@ -11,7 +11,6 @@ def fitnessScore(chromosome):  # using number of non-attacking pairs of queens a
         y = int(chromosome[x1])
 
         for x2 in range(8):
-
             if x2 == x1:
                 continue
             if int(chromosome[x2]) == y:
