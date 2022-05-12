@@ -3,6 +3,10 @@
 # maximum number of queens on the board. Will also affect board size
 QUEEN_COUNT = 8
 
+# if true, will visualize the backtracking process
+# WARNING: This will drastically slow down the execution
+SHOW_PROCESS = False
+
 # GENETICS:
 
 # one in X cases will mutate
@@ -22,4 +26,4 @@ MUTATION_COUNT = 1
 
 # if true, after reproduction, child and parents will be compared. The best individual will be added to new population
 # WARNING: This will drastically increase the chance to end in a local maximum
-DOUBLE_CHECK = False
+DOUBLE_CHECK = True

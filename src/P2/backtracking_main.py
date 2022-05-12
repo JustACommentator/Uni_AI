@@ -5,7 +5,6 @@ import settings
 import time
 from pygame import display
 
-
 backtracking.start()
 Q = queens_problem.QueensProblem()
 solution_count = len(backtracking.BOARDLIST)

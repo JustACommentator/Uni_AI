@@ -36,7 +36,8 @@ def safe(x, y, checkerboard):
 
 
 def backtrack(x, checkerboard):
-    board.update_board(checkerboard)
+    if settings.SHOW_PROCESS:
+        board.update_board(checkerboard)
     if x >= settings.QUEEN_COUNT:
         BOARDLIST.append(deep(checkerboard))
         return

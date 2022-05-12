@@ -43,6 +43,7 @@ def update(queenString):
 
     pg.display.flip()
 
+
 def update_board(board):
     SCREEN.fill((0, 0, 0))
     drawBoard(BOARD)
