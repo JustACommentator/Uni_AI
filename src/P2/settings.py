@@ -13,7 +13,7 @@ SHOW_PROCESS = False
 MUTATION_CHANCE = 100
 
 # iterations til end
-ITERATION_COUNT = 10000
+ITERATION_COUNT = 100
 
 # size of Population
 POPULATION_SIZE = 500

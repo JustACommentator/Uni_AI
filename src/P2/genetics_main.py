@@ -19,7 +19,7 @@ for i in range(settings.ITERATION_COUNT):
     for chromosome in population:
         fitnesses.append(gen.fitnessScore(chromosome))
     maxFitness = max(fitnesses)
-    avg2 = round(sum(fitnesses)/settings.POPULATION_SIZE,2)
+    avg2 = round(sum(fitnesses)/settings.POPULATION_SIZE, 2)
     print(f"Best specimen: {population[fitnesses.index(maxFitness)]}. Fitness score: {maxFitness}. Average: {avg2}")
     pygame.display.set_caption(f"Population: {settings.POPULATION_SIZE}; Generation: {i + 1}; Score: {maxFitness}; Average: {avg2}")
     board.update(population[fitnesses.index(maxFitness)])
